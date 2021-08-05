@@ -1,4 +1,5 @@
 
+
 """
 File: chapter02/button_gpiozero.py
 
@@ -18,27 +19,18 @@ BUTTON_GPIO_PIN = 23
 
 Device.pin_factory = PiGPIOFactory() #set gpiozero to use pigpio by default.
 
-def pressed():
-	if led.value == 0:
-		led.on()
-		state = 'on'
-	else:
-		led.off()
-		state = 'off'
-	print("Button was pressed, LED is now " + state)
-
 def held():
-	if led.value == 0:
-		led.on()
-	report_state()
+	light_control(1)
 
 def released():
-	if led.value == 1:
-		led.off()
-	report_state()
+	light_control(0)
 
-def report_state():
-	if led.value == 1:
+def light_control(value):
+	led.value = value
+	report_state(value)
+
+def report_state(value):
+	if value == 1:
 		state = 'on'
 	else:
 		state = 'off'
