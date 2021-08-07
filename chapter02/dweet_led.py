@@ -190,5 +190,5 @@ if __name__ == '__main__':
 
     print('Waiting for dweets. Press Control+C to exit.')
     #Only use one of the following. See notes later in Chapter.
-    #stream_dweets_forever() # Stream dweets real-time.
-    poll_dweets_forever() # Get dweets by polling a URL on a schedule.             # (19)
+    stream_dweets_forever() # Stream dweets real-time.
+    # poll_dweets_forever() # Get dweets by polling a URL on a schedule.             # (19)
