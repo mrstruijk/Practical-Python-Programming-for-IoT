@@ -24,8 +24,9 @@ logger.setLevel(logging.INFO) # Debugging for this file.
 # Initialize GPIOZero
 Device.pin_factory = PiGPIOFactory() #set GPIOZero to use PiGPIO by default
 
+
 # Flask & Flask-RESTful instance variables
-app = Flask(__name__) # Core Flask app.                                              # (4)
+app = Flask(__name__) # Root / core Flask app.                                       # (4)
 api = Api(app) # Flask-RESTful extension wrapper                                     # (5)
 
 
@@ -35,6 +36,7 @@ led = None # PWMLED Instance. See init_led()
 state = {                                                                            # (6)
     'level': 50 # % brightless of LED.
 }
+
 
 """
 GPIO Related Functions
@@ -49,13 +51,11 @@ def init_led():
 """
 Flask & Flask-Restful Related Functions
 """
-
 # @app.route applies to the core Flask instance (app).
 # Here we are serving a simple web page.
 @app.route('/', methods=['GET'])                                                     # (8)
 def index():
-    """Make sure inde.html is in the templates folder
-    relative to this Python file."""
+    """Make sure index.html is in the templates folder relative to this Python file."""
     return render_template('index_api_client.html', pin=LED_GPIO_PIN)                # (9)
 
 
@@ -102,9 +102,7 @@ api.add_resource(LEDControl, '/led')                                            
 if __name__ == '__main__':
 
     # If you have debug=True and receive the error "OSError: [Errno 8] Exec format error", then:
-    # remove the execuition bit on this file from a Terminal, ie:
+    # remove the execution bit on this file from a Terminal, ie:
     # chmod -x flask_api_server.py
-    #
     # Flask GitHub Issue: https://github.com/pallets/flask/issues/3189
-
     app.run(host="0.0.0.0", debug=True)                                              # (20)
